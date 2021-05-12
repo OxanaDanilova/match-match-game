@@ -16,7 +16,6 @@ header,
 main,
 footer {
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: space-around;
 }
@@ -24,6 +23,7 @@ footer {
 main {
     background-color: rgb(141, 71, 255);
     height: 80vh;
+
 }
 
 header,
@@ -93,4 +93,13 @@ footer {
 
 .flipped {
     transform: rotateY(180deg);
+}
+
+.wrong-cards {
+  border: 3px solid red;
+}
+
+.right-cards {
+  border: 3px solid green;
+
 }
