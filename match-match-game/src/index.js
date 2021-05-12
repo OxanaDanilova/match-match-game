@@ -17,6 +17,27 @@ import './style.scss';
     };
 
 class Game {
+    startTimer(){
+      let gameTime = document.querySelector('.game-time');
+      let sec = 0;
+      let min = 0;
+      let timerId = setInterval(function(){
+        if (+sec>=59){
+          min += 1;
+          sec = 0;
+        }
+        sec += 1;
+        if (String(min).length===1){
+          min = '0' + min;
+        }
+        if (String(sec).length===1){
+          sec = '0' + sec;
+        }
+        gameTime.innerHTML = `${min}:${sec}`;
+        min = +min;
+        sec = +sec;
+      }, 1000);
+    }
     start() {
         const cards = document.querySelector('.cards');
         const cardHandle = (event) => {
@@ -28,6 +49,7 @@ class Game {
 
         }
         cards.addEventListener('click', cardHandle);
+        this.startTimer();
     }
 
 }
