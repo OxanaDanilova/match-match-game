@@ -87,12 +87,16 @@ footer {
 
 .back-side {
     background-color: teal;
+    background-image: url(../public/images/animal/10.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
     border-radius: 0.75rem;
     transform: rotateY(-180deg);
 
 }
 
-.flipped {
+.flipped > .card {
     transform: rotateY(180deg);
 }
 

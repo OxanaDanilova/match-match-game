@@ -13,7 +13,7 @@ import './style.scss';
         element.innerHTML = `
         <div class="card">
         <div class="front-side">Front</div>
-        <div class="back-side">${i}</div>
+        <div class="back-side" style = "background-image: url(./images/animal/${i+1}.jpg)">${i}</div>
         </div>`;
         cards.appendChild(element);
         }
@@ -23,11 +23,11 @@ import './style.scss';
           element.innerHTML = `
           <div class="card">
           <div class="front-side">Front</div>
-          <div class="back-side">${i}</div>
+          <div class="back-side" style = "background-image: url(./images/animal/${i+1}.jpg)">${i}</div>
           </div>`;
           cards.appendChild(element);
           }
-    }
+        }
     };
 
 
@@ -68,8 +68,6 @@ class Game {
     }
     checkActiveCards() {
       const activeCards = document.querySelectorAll('.active-card');
-      console.log('activeCards', activeCards);
-      console.log('activecard.innerhTML', activeCards[0].innerHTML);
         if (activeCards.length===2){
           if (activeCards[0].innerHTML===activeCards[1].innerHTML){
             this.wrigthSteps += 1;
@@ -84,7 +82,7 @@ class Game {
               element.classList.add('wrong-cards');
               setTimeout(function(){
                 element.classList.remove('wrong-cards');
-                element.parentElement!.classList.remove('flipped');
+                element.parentElement!.parentElement!.classList.remove('flipped');
               }, 2000);
             })
           }
@@ -104,7 +102,7 @@ class Game {
         const cardHandle = (event:any) => {
             let target = event.target;
             if (target.classList.contains('front-side')) {
-                target.parentElement.classList.add('flipped');
+                target.parentElement.parentElement.classList.add('flipped');
                 target.nextElementSibling.classList.add('active-card');
                 this.checkActiveCards();
             }
