@@ -1,0 +1,41 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgb(19, 94, 112);
+  height: 10vh;
+
+}
+
+nav {
+width: 300px;
+margin-left: 100px;
+}
+
+.menu {
+list-style: none;
+display: flex;
+justify-content: space-between;
+li {
+  cursor: pointer;
+}
+
+}
+
+.menu li:hover,
+.menu-active {
+color: rgb(162, 148, 240);
+
+}
+
+.register-btn {
+margin-right: 100px;
+width: 100px;
+height: 40px;
+font-size: 1.1rem;
+background-color: mediumslateblue;
+color: aliceblue;
+border: none;
+cursor: pointer;
+}
+

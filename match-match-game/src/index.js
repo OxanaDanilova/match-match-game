@@ -1,5 +1,16 @@
 import './style.scss';
- class App {
+import Header from './components/header/Header';
+
+class App {
+  render() {
+    const header = new Header();
+    header.render();
+  }
+}
+
+const app = new App();
+app.render();
+/* class App {
     constructor() {}
     createCards(number:number) {
         const cards:HTMLElement = document.createElement('ul');
@@ -28,10 +39,10 @@ import './style.scss';
           cards.appendChild(element);
           }
         }
-    };
+    };*/
 
 
-class Game {
+/*class Game {
   wrigthSteps:number = 0;
   time:number = 0;
   timerId:any;
@@ -117,4 +128,4 @@ class Game {
 const app = new App();
 app.createCards(4);
 const game = new Game();
-game.start();
+game.start(); */

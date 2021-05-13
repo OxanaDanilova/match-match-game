@@ -12,9 +12,8 @@ body {
     background-color: burlywood;
 }
 
-header,
-main,
-footer {
+
+main {
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -26,11 +25,7 @@ main {
 
 }
 
-header,
-footer {
-    background-color: rgb(19, 94, 112);
-    height: 10vh;
-}
+
 .cards {
     width: 70%;
     max-width: 100vw;
