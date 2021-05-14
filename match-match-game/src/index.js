@@ -1,10 +1,13 @@
 import './style.scss';
 import Header from './components/header/Header';
+import Registration from './components/registration/Registration'
 
 class App {
   render() {
     const header = new Header();
     header.render();
+    const registration = new Registration();
+    registration.render();
   }
 }
 

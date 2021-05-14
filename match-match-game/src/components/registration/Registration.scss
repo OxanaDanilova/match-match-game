@@ -1,0 +1,76 @@
+.register-form {
+  width: 500px;
+  height: 400px;
+  background-color: rgb(131, 50, 207);
+  border-radius: 25px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  .register-form-wrapper {
+    width: 470px;
+    height: 390px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    h4 {
+      align-self: center;
+      font-size: 1.5rem;
+    }
+
+  }
+  label {
+    align-self: flex-end;
+  }
+}
+
+#first-name,
+#second-name,
+#email {
+  height: 30px;
+  margin: 10px;
+  width: 300px;
+  padding-left: 10px;
+}
+
+#first-name:invalid,
+#second-name:invalid,
+#email:invalid {
+  border: 2px solid red;
+}
+#first-name:valid,
+#second-name:valid,
+#email:valid {
+  border: 2px solid green;
+}
+
+#first-name:focus-visible,
+#second-name:focus-visible,
+#email:focus-visible {
+  outline: none;
+}
+
+.form-btn-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.submit-btn,
+.cancel-btn {
+  width: 110px;
+  height: 40px;
+  color: aliceblue;
+  background-color: darkcyan;
+  font-size: 1.1rem;
+  font-weight: 300;
+  margin: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  align-self: center;
+
+}
+
+.cancel-btn {
+  background-color:  white;
+  color: darkcyan;
+}
