@@ -2,34 +2,52 @@ import './Registration.scss'
 export default class Registration {
   render() {
     const main = document.createElement('main');
-    main.innerHTML = `<form action="" class="register-form">
-    <div class="register-form-wrapper">
-      <h4>Registration</h4>
-    <label for="first-name">First Name
-      <input type="text" name="first-name" id="first-name" maxlength="30" pattern="^[0-9]{1-30}" required>
-    </label>
+    main.innerHTML = `
+    <form action="" class="register-form">
+      <div class="register-form-wrapper">
+        <h4>Registration</h4>
+        <div class="form-field-wrapper">
+          <label for="first-name">First Name</label>
+          <input type="text" name="first-name" id="first-name" maxlength="30"
+            title="First name field can contain only letters (no numbers or special characters)">
+          <i class="fas fa-check-circle"></i>
+          <i class="fas fa-exclamation-circle"></i>
+          <p class="error-message">Error message</p>
+        </div>
+        <div class="form-field-wrapper">
+          <label for="second-name">Second Name</label>
+          <input type="text" name="second-name" id="second-name" maxlength="30"
+            title="Last name field can contain only letters (no numbers or special characters)">
+          <i class="fas fa-check-circle"></i>
+          <i class="fas fa-exclamation-circle"></i>
+          <p class="error-message">Error message</p>
+        </div>
+        <div class="form-field-wrapper">
+          <label for="email">Email</label>
+          <input type="email" name="email" id="email" maxlength="30">
+          <i class="fas fa-check-circle"></i>
+          <i class="fas fa-exclamation-circle"></i>
+          <p class="error-message">Error message</p>
+        </div>
+        <div class="form-btn-wrapper">
+          <input type="submit" value="Submit" class="submit-btn" disabled>
+          <input type="reset" value="Cancel" class="cancel-btn">
 
-    <label for="second-name">Second Name
-      <input type="text" name="second-name" id="second-name" maxlength="30" required>
-    </label>
-
-    <label for="email">Email
-      <input type="email" name="email" id="email" maxlength="30" required>
-    </label>
-    <div class="form-btn-wrapper">
-      <input type="submit" value="Submit" class="submit-btn">
-      <input type="reset" value="Cancel" class = "cancel-btn">
-
-    </div>
-  </div>
-</form>
-    `;
+        </div>
+      </div>
+    </form>`;
     document.body.appendChild(main);
     const regBtn = document.querySelector('.register-btn');
     regBtn.addEventListener('click', this.displayForm);
-    const firstNameInput = document.querySelector('#first-name');
-    console.log(firstNameInput);
-    firstNameInput.addEventListener('keydown', this.validationForm);
+    const userFirstName = document.querySelector('#first-name');
+    const userSecondName = document.querySelector('#second-name');
+    const userEmail = document.querySelector('#email');
+
+    userFirstName.addEventListener('keyup', (event)=>this.checkFormInputs(event.target));
+    userSecondName.addEventListener('keyup', (event)=>this.checkFormInputs(event.target));
+    userEmail.addEventListener('keyup', (event)=>this.checkEmail(event.target));
+    const form = document.querySelector('.register-form');
+    form.addEventListener('submit', this.validationForm);
 
   }
   displayForm() {
@@ -37,20 +55,73 @@ export default class Registration {
     form.style.display = 'flex';
   }
   validationForm = (event)=> {
-    let inputValue = event.target.value;
-    let reg1 = /\w+/g;
-    let reg2 = /\.|\?/g;
-  let reg3 = /^(\w){1,30}$/;
-  let reg4 = /[0-9]/g;
-  let result;
-   // if(inputValue.length==30) return false;       ~|!|@|#|$|%|*|(|)|_|—|+|=|\|:|;|"|'|`|<|>|,|
-  /* if (reg1.test(inputValue) && reg2.test(inputValue) && !reg3.test(inputValue)) {
-  result = true;
-  } else {
-    result = false;
-  } */
-  console.log(inputValue);
-  if (reg4.test(inputValue)) return false;
+    event.preventDefault();
+    const userFirstName = document.querySelector('#first-name');
+    const userSecondName = document.querySelector('#second-name');
+    const userEmail = document.querySelector('#email');
+    console.log('User', userFirstName.value.trim(), userSecondName.value.trim(), userEmail.value.trim());
+}
 
+isFormComplete() {
+  const fullFields = document.querySelectorAll('.success');
+  const submitBtn = document.querySelector('.submit-btn');
+  if (fullFields.length === 3) {
+    submitBtn.disabled = false;
+  } else {
+    submitBtn.disabled = true;
+  }
+}
+
+checkFormInputs(element){
+  const regNumber = /[0-9]/g;
+  const regChar = /[~!@#$%*()_—+=|:;"'`<>,.?/^]/g;
+  let message = '';
+  if (element.value.trim()===''){
+    message = 'This field can not be empty!';
+    this.setErrorStatus(element, message);
+  } else {
+    if ((regNumber.test(element.value.trim())===true) ||
+    (regChar.test(element.value.trim())===true))  {
+      message = `This field can't contain numbers oder ~!@#$%*()_—+=|:;"'<>,.?/^&#x60;`;
+      this.setErrorStatus(element, message);
+  } else {
+    this.setSuccessStatus(element);
+  }
+  }
+  this.isFormComplete();
+}
+
+checkEmail(element) {
+  const regEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  let message = '';
+  if (element.value.trim()===''){
+    message = 'This field can not be empty!';
+    this.setErrorStatus(element, message);
+  } else {
+    if (regEmail.test(element.value.trim())===false) {
+      message = 'Email is not valid!';
+      this.setErrorStatus(element, message);
+  } else {
+    this.setSuccessStatus(element);
+  }
+}
+this.isFormComplete();
+}
+
+setErrorStatus(element, message) {
+  const parent = element.parentElement;
+  if (parent.classList.contains('success')){
+    parent.classList.remove('success');
+  }
+  parent.classList.add('error');
+  parent.children[4].innerHTML = message;
+}
+
+setSuccessStatus(element) {
+const parent = element.parentElement;
+  if (parent.classList.contains('error')) {
+    parent.classList.remove('error');
+  };
+  parent.classList.add('success');
 }
 }

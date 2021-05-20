@@ -1,6 +1,6 @@
 .register-form {
   width: 500px;
-  height: 400px;
+  height: 450px;
   background-color: rgb(131, 50, 207);
   border-radius: 25px;
   display: none;
@@ -8,7 +8,7 @@
   justify-content: center;
   .register-form-wrapper {
     width: 470px;
-    height: 390px;
+    height: 430px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -18,29 +18,22 @@
     }
 
   }
-  label {
-    align-self: flex-end;
-  }
+ }
+
+ form i {
+  position: absolute;
+  top: 38.5px;
+  right: 7px;
+  visibility: hidden;
 }
 
 #first-name,
 #second-name,
 #email {
   height: 30px;
-  margin: 10px;
-  width: 300px;
+  margin-top: 10px;
   padding-left: 10px;
-}
-
-#first-name:invalid,
-#second-name:invalid,
-#email:invalid {
-  border: 2px solid red;
-}
-#first-name:valid,
-#second-name:valid,
-#email:valid {
-  border: 2px solid green;
+  border-radius: 4px;
 }
 
 #first-name:focus-visible,
@@ -60,7 +53,7 @@
   width: 110px;
   height: 40px;
   color: aliceblue;
-  background-color: darkcyan;
+  background-color: #099c36;
   font-size: 1.1rem;
   font-weight: 300;
   margin: 10px;
@@ -70,7 +63,54 @@
 
 }
 
+.submit-btn:disabled{
+  background-color: #357979d1;
+  cursor: unset;
+}
+
 .cancel-btn {
   background-color:  white;
   color: darkcyan;
+}
+
+.error-message {
+  visibility: hidden;
+}
+
+.form-field-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-field-wrapper.success input {
+  border: 2px solid;
+  border-color: #2ecc71;
+}
+
+.form-field-wrapper.success .fa-check-circle {
+  visibility: visible;
+  color: #2ecc71;
+}
+
+.form-field-wrapper.error .error-message {
+  visibility: visible;
+  color: #e74c3c;
+}
+
+.form-field-wrapper.error .fa-check-circle,
+.form-field-wrapper.success .fa-exclamation-circle {
+  visibility: hidden;
+}
+
+
+.form-field-wrapper.error input {
+  border: 2px solid;
+  border-color: #e74c3c;
+}
+
+.form-field-wrapper.error .fa-exclamation-circle {
+  visibility: visible;
+  color: #e74c3c;
+
 }

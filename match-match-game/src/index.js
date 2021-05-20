@@ -6,8 +6,8 @@ class App {
   render() {
     const header = new Header();
     header.render();
-    const registration = new Registration();
-    registration.render();
+   const registration = new Registration();
+   registration.render();
   }
 }
 
