@@ -49,6 +49,20 @@ export default class Registration {
     const form = document.querySelector('.register-form');
     form.addEventListener('submit', this.validationForm);
 
+    const cancelBtn = document.querySelector('.cancel-btn');
+    cancelBtn.addEventListener('click', this.clearForm);
+
+  }
+  clearForm() {
+    const allFields = document.querySelectorAll('.form-field-wrapper');
+    allFields.forEach((el)=> {
+      if (el.classList.contains('success')){
+        el.classList.remove('success');
+      }
+      if (el.classList.contains('error')){
+        el.classList.remove('error');
+      }
+    })
   }
   displayForm() {
     const form = document.querySelector('.register-form');
