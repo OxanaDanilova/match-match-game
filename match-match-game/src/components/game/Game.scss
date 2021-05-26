@@ -1,0 +1,87 @@
+.gameParamaters {
+  height: 150px;
+    color: #8d47ff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    position: sticky;
+}
+
+.cards {
+  width: 70%;
+  max-width: 100vw;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-content: space-around;
+  flex-wrap: wrap;
+  align-items: center;
+  list-style: none;
+
+}
+
+.card-wrapper {
+  perspective: 14rem;
+
+}
+
+.card {
+  width: 10rem;
+  height: 12rem;
+  margin: 0.75rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgb(92, 6, 6);
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: all .5s;
+  position: relative;
+  box-shadow: 0 0 .5rem black;
+
+}
+
+.card:hover {
+  transform: translateZ(1rem);
+  box-shadow: 0 0.5rem 1rem black;
+
+
+}
+
+.front-side,
+.back-side {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.front-side {
+  background-color: violet;
+  border-radius: 0.75rem;
+}
+
+.back-side {
+  background-color: teal;
+  //background-image: url(../public/images/animal/10.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-radius: 0.75rem;
+  transform: rotateY(-180deg);
+
+}
+
+.flipped > .card {
+  transform: rotateY(180deg);
+}
+
+.wrong-cards {
+border: 3px solid red;
+}
+
+.right-cards {
+border: 3px solid green;
+
+}
+

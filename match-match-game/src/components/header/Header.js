@@ -19,11 +19,30 @@ export default class Header {
       ul.appendChild(li);
     }
 
+    const userBlock = document.createElement('p');
+    userBlock.classList.add('user-block');
+    header.appendChild(userBlock);
+
     const regBtn = document.createElement('button');
-    regBtn.innerHTML = 'Register';
+    regBtn.innerHTML = 'Register new player';
     regBtn.classList.add('register-btn');
     header.appendChild(regBtn);
 
+    const startGameBtn = document.createElement('button');
+    startGameBtn.innerHTML = 'Start game';
+    startGameBtn.classList.add('start-game-btn');
+    header.appendChild(startGameBtn);
+
+  }
+
+  displayStartGame(firstName, secondName) {
+    const startGameBtn = document.querySelector('.start-game-btn');
+    startGameBtn.style.display = 'block';
+    const regBtn = document.querySelector('.register-btn');
+    regBtn.style.display = 'none';
+    const userBlock = document.querySelector('.user-block');
+    userBlock.innerHTML = `User: ${firstName} ${secondName}`;
+    userBlock.style.display = 'block';
   }
 
 }

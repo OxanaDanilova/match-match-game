@@ -1,4 +1,7 @@
-import './Registration.scss'
+import './Registration.scss';
+import User from '../user/User';
+import Header from '../header/Header';
+import Game from '../game/Game';
 export default class Registration {
   render() {
     const main = document.createElement('main');
@@ -30,7 +33,7 @@ export default class Registration {
           <p class="error-message">Error message</p>
         </div>
         <div class="form-btn-wrapper">
-          <input type="submit" value="Submit" class="submit-btn" disabled>
+          <input type="submit" value="Add user" class="submit-btn" disabled>
           <input type="reset" value="Cancel" class="cancel-btn">
 
         </div>
@@ -47,7 +50,7 @@ export default class Registration {
     userSecondName.addEventListener('keyup', (event)=>this.checkFormInputs(event.target));
     userEmail.addEventListener('keyup', (event)=>this.checkEmail(event.target));
     const form = document.querySelector('.register-form');
-    form.addEventListener('submit', this.validationForm);
+    form.addEventListener('submit', this.createUser);
 
     const cancelBtn = document.querySelector('.cancel-btn');
     cancelBtn.addEventListener('click', this.clearForm);
@@ -68,13 +71,6 @@ export default class Registration {
     const form = document.querySelector('.register-form');
     form.style.display = 'flex';
   }
-  validationForm = (event)=> {
-    event.preventDefault();
-    const userFirstName = document.querySelector('#first-name');
-    const userSecondName = document.querySelector('#second-name');
-    const userEmail = document.querySelector('#email');
-    console.log('User', userFirstName.value.trim(), userSecondName.value.trim(), userEmail.value.trim());
-}
 
 isFormComplete() {
   const fullFields = document.querySelectorAll('.success');
@@ -137,5 +133,23 @@ const parent = element.parentElement;
     parent.classList.remove('error');
   };
   parent.classList.add('success');
+}
+
+createUser = (event)=> {
+  event.preventDefault();
+  const userFirstName = document.querySelector('#first-name').value.trim();
+  const userSecondName = document.querySelector('#second-name').value.trim();
+  const userEmail = document.querySelector('#email').value.trim();
+  const user = new User(userFirstName, userSecondName, userEmail);
+  const header = new Header();
+  console.log('fisrtName', user.firstName);
+  header.displayStartGame(userFirstName, userSecondName);
+  const game = new Game();
+  game.createCards(4);
+  game.start();
+  const form = document.querySelector('.register-form');
+  form.style.display = 'none';
+  this.clearForm();
+
 }
 }

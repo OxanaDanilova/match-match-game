@@ -4,6 +4,7 @@ header {
   align-items: center;
   background-color: rgb(19, 94, 112);
   height: 10vh;
+  min-height: 55px;
 
 }
 
@@ -28,19 +29,33 @@ color: rgb(162, 148, 240);
 
 }
 
-.register-btn {
-margin-right: 100px;
-width: 100px;
-height: 40px;
-font-size: 1.1rem;
-background-color: mediumslateblue;
-color: aliceblue;
-border: none;
-cursor: pointer;
+.register-btn,
+.start-game-btn {
+  margin-right: 100px;
+  height: 40px;
+  font-size: 1.1rem;
+  color: mediumslateblue;
+  background-color: aliceblue;
+  border: none;
+  cursor: pointer;
+  padding: 0 5px;
+  border-radius: 11px;
 }
 
-.register-btn:active {
-  background-color: rgb(80, 53, 233);
+.start-game-btn {
+  display: none;
+}
 
+.register-btn:active,
+.start-game-btn:active {
+  background-color: rgb(80, 53, 233);
+  color: aliceblue;
+
+}
+
+.user-block {
+  max-width: 200px;
+  color: aliceblue;
+  display: none;
 }
 
