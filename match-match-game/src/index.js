@@ -3,6 +3,7 @@ import Header from './components/header/Header';
 import Registration from './components/registration/Registration';
 import Game from './components/game/Game';
 import Settings from './components/settingsGame/Settings';
+import BestScore from './components/bestScore/BestScore';
 
 class App {
   render() {
@@ -14,6 +15,8 @@ class App {
    settings.render();
    const game = new Game();
   game.handleStartBtn();
+  const bestScore = new BestScore();
+  bestScore.render();
   }
 }
 
