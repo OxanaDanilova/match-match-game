@@ -21,7 +21,6 @@ export default class Settings {
         <option value="8">8x8</option>
       </select>
     </section>
-            <input type="submit" value="Submit">
     `;
     main.appendChild(settingsForm);
 
@@ -37,5 +36,13 @@ export default class Settings {
     registerForm.style.display = 'none';
     const settingsForm = document.querySelector('.settings-wrapper');
     settingsForm.style.display = 'flex';
+  }
+  getCardsQuantity() {
+    const quantityCards = document.querySelector('#cardsQuantity').value;
+    return quantityCards;
+  }
+  getCardsType() {
+    const typeCards = document.querySelector('#cardsType').value;
+    return typeCards;
   }
 }

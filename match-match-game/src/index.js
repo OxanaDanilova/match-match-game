@@ -1,8 +1,8 @@
 import './style.scss';
 import Header from './components/header/Header';
 import Registration from './components/registration/Registration';
+import Game from './components/game/Game';
 import Settings from './components/settingsGame/Settings';
-//import Game from './components/game/Game';
 
 class App {
   render() {
@@ -12,8 +12,8 @@ class App {
    registration.render();
    const settings = new Settings();
    settings.render();
-  // const game = new Game()
-
+   const game = new Game();
+  game.handleStartBtn();
   }
 }
 

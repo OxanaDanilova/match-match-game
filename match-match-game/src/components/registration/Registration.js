@@ -2,6 +2,7 @@ import './Registration.scss';
 import User from '../user/User';
 import Header from '../header/Header';
 import Game from '../game/Game';
+import Settings from '../settingsGame/Settings';
 export default class Registration {
   render() {
     const main = document.createElement('main');
@@ -142,11 +143,7 @@ createUser = (event)=> {
   const userEmail = document.querySelector('#email').value.trim();
   const user = new User(userFirstName, userSecondName, userEmail);
   const header = new Header();
-  console.log('fisrtName', user.firstName);
   header.displayStartGame(userFirstName, userSecondName);
-  const game = new Game();
-  game.createCards(4);
-  game.start();
   const form = document.querySelector('.register-form');
   form.style.display = 'none';
   this.clearForm();

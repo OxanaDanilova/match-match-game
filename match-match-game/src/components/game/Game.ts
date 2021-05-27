@@ -1,6 +1,13 @@
+import Settings from '../settingsGame/Settings';
 import './Game.scss';
 export default class Game {
-  createCards(number:number) {
+  handleStartBtn(){
+    const startBtn = document.querySelector('.start-game-btn');
+    const game = new Game();
+    startBtn?.addEventListener('click', this.start.bind(game));
+
+  }
+  createCards(cardsQuantity:number, cardsType:string) {
     const gameParameters = document.createElement('div');
     gameParameters.innerHTML = `
     <div class="timer-wrapper">
@@ -18,23 +25,23 @@ export default class Game {
     document.body.appendChild(main);
     cards.classList.add('cards');
       main.appendChild(cards);
-    for (let i:number=0; i<number; i++) {
+    for (let i:number=0; i<cardsQuantity; i++) {
     let element:HTMLElement = document.createElement('li');
     element.classList.add('card-wrapper');
     element.innerHTML = `
     <div class="card">
     <div class="front-side">Front</div>
-    <div class="back-side" style = "background-image: url(./images/animal/${i+1}.jpg)">${i}</div>
+    <div class="back-side" style = "background-image: url(./images/${cardsType}/${i+1}.jpg)">${i}</div>
     </div>`;
     cards.appendChild(element);
     }
-    for (let i:number=0; i<number; i++) {
+    for (let i:number=0; i<cardsQuantity; i++) {
       let element:HTMLElement = document.createElement('li');
       element.classList.add('card-wrapper');
       element.innerHTML = `
       <div class="card">
       <div class="front-side">Front</div>
-      <div class="back-side" style = "background-image: url(./images/animal/${i+1}.jpg)">${i}</div>
+      <div class="back-side" style = "background-image: url(./images/${cardsType}/${i+1}.jpg)">${i}</div>
       </div>`;
       cards.appendChild(element);
       }
@@ -105,7 +112,9 @@ finish(score:number){
   }
   clearInterval(this.timerId);
 }
+
 start() {
+  this.setGameSettings();
     const cards = document.querySelector('.cards');
     const cardHandle = (event:any) => {
         let target = event.target;
@@ -118,6 +127,13 @@ start() {
     }
     cards!.addEventListener('click', cardHandle);
     this.startTimer();
+}
+
+setGameSettings() {
+  const settings = new Settings();
+  const cardsQuantity = settings.getCardsQuantity();
+  const cardsType = settings.getCardsType();
+  this.createCards(cardsQuantity, cardsType);
 }
 
 }
