@@ -35,14 +35,23 @@ export default class Header {
 
   }
 
-  displayStartGame(firstName, secondName) {
+  displayStartGame(firstName, secondName, email) {
     const startGameBtn = document.querySelector('.start-game-btn');
     startGameBtn.style.display = 'block';
     const regBtn = document.querySelector('.register-btn');
     regBtn.style.display = 'none';
     const userBlock = document.querySelector('.user-block');
-    userBlock.innerHTML = `User: ${firstName} ${secondName}`;
-    userBlock.style.display = 'block';
+    userBlock.innerHTML = `
+    <p>User:</p>
+    <p class="firstName">${firstName}</p>
+    <p class="secondName"> ${secondName}</p>`;
+    userBlock.style.display = 'flex';
+    const p = document.createElement('p');
+    p.innerHTML = `
+    <p class="email">${email}</p>`;
+    p.style.display = 'none';
+    userBlock.appendChild(p);
+
   }
 
 }

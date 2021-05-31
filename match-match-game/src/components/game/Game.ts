@@ -1,7 +1,10 @@
+import CongratsPopup from '../congratsPopup/CongratsPopup';
+import Router from '../router/Router';
 import Settings from '../settingsGame/Settings';
 import './Game.scss';
 export default class Game {
-  handleStartBtn(){
+
+    handleStartBtn(){
     const startBtn = document.querySelector('.start-game-btn');
     const game = new Game();
     startBtn?.addEventListener('click', this.start.bind(game));
@@ -104,11 +107,13 @@ checkActiveCards() {
   }
 
 }
+
 finish(score:number){
   const flippedCards = document.querySelectorAll('.flipped');
   const allCards = document.querySelectorAll('.card');
   if (flippedCards.length === allCards.length) {
-    alert(`Congratilations! Your score is ${score}!!!!`);
+    const congratsPopup = new CongratsPopup();
+    congratsPopup.render(score);
   }
   clearInterval(this.timerId);
 }
@@ -130,6 +135,8 @@ start() {
 }
 
 setGameSettings() {
+  const router = new Router();
+    router.clearAllForm();
   const settings = new Settings();
   const cardsQuantity = settings.getCardsQuantity();
   const cardsType = settings.getCardsType();

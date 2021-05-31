@@ -3,6 +3,7 @@ import User from '../user/User';
 import Header from '../header/Header';
 import Game from '../game/Game';
 import Settings from '../settingsGame/Settings';
+import Router from '../router/Router';
 export default class Registration {
   render() {
     const main = document.createElement('main');
@@ -69,6 +70,8 @@ export default class Registration {
     })
   }
   displayForm() {
+    const router = new Router();
+    router.clearAllForm();
     const form = document.querySelector('.register-form');
     form.style.display = 'flex';
   }
@@ -141,9 +144,8 @@ createUser = (event)=> {
   const userFirstName = document.querySelector('#first-name').value.trim();
   const userSecondName = document.querySelector('#second-name').value.trim();
   const userEmail = document.querySelector('#email').value.trim();
-  const user = new User(userFirstName, userSecondName, userEmail);
   const header = new Header();
-  header.displayStartGame(userFirstName, userSecondName);
+  header.displayStartGame(userFirstName, userSecondName, userEmail);
   const form = document.querySelector('.register-form');
   form.style.display = 'none';
   this.clearForm();

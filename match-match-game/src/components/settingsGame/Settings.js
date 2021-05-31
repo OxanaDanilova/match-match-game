@@ -1,3 +1,4 @@
+import Router from '../router/Router';
 import './Settings.scss';
 export default class Settings {
   render(){
@@ -32,8 +33,8 @@ export default class Settings {
 
   }
   showSettingsForm() {
-    const registerForm = document.querySelector('.register-form');
-    registerForm.style.display = 'none';
+    const router = new Router();
+    router.clearAllForm();
     const settingsForm = document.querySelector('.settings-wrapper');
     settingsForm.style.display = 'flex';
   }
