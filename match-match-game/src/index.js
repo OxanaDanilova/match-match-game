@@ -9,8 +9,8 @@ import { AboutGame } from './components/aboutGame/AboutGame';
 
 class App {
   render() {
-    const header = new Header();
-    header.render();
+   const header = new Header();
+   header.render();
    const registration = new Registration();
    registration.render();
    const aboutGame = new AboutGame();
@@ -21,8 +21,6 @@ class App {
   game.handleStartBtn();
   const bestScore = new BestScore();
   bestScore.render([]);
- // const db = new DataBase();
- // db.checkDublicates("Dmitrii1", "Panfilov1", "df@ff.ff", 180);
   }
 }
 

@@ -22,6 +22,10 @@ export default class Router {
       document.querySelector('.gameParamaters').style.display = 'none';
     }
 
+    if (document.querySelector('.congr-wrapper')){
+      document.querySelector('.congr-wrapper').style.display = 'none';
+    }
+
 
   }
 }

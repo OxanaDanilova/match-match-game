@@ -1,6 +1,6 @@
 import BestScore from '../bestScore/BestScore';
 export default class DataBase {
-  array=[{"first_name":"Dmitrii1", "second_name":"Panfilov1", "email":"df@ff.ff", "score":"200"},
+  array=[/* {"first_name":"Dmitrii1", "second_name":"Panfilov1", "email":"df@ff.ff", "score":"200"},
   {"first_name":"Dmitrii", "second_name":"Panfilov", "email":"df@ff.ff", "score":"200"},
   {"first_name":"Dmitrii", "second_name":"Panfilov", "email":"df@ff.ff", "score":"300"},
   {"first_name":"Dmitrii", "second_name":"Panfilov", "email":"df@ff.ff", "score":"200"},
@@ -9,7 +9,7 @@ export default class DataBase {
   {"first_name":"Dmitrii", "second_name":"Panfilov", "email":"df@ff.ff", "score":"200"},
   {"first_name":"Dmitrii", "second_name":"Panfilov", "email":"df@ff.ff", "score":"400"},
   {"first_name":"Dmitrii", "second_name":"Panfilov", "email":"df@ff.ff", "score":"250"},
-  {"first_name":"Dmitrii", "second_name":"Panfilov", "email":"df@ff.ff", "score":"310"}];
+  {"first_name":"Dmitrii", "second_name":"Panfilov", "email":"df@ff.ff", "score":"310"} */];
   getMinScore(){
     let item = this.array[this.array.length-1].score;
     console.log(item);
@@ -29,6 +29,11 @@ export default class DataBase {
           if (+item.score<+userScore) {
             item.score = userScore;
             userScore = 0;
+            const bestScore = new BestScore();
+            bestScore.render(this.array);
+          } else {
+            const bestScore = new BestScore();
+            bestScore.render(this.array);
           }
         }
     });

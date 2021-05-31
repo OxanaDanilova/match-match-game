@@ -33,7 +33,7 @@ export default class Game {
     element.classList.add('card-wrapper');
     element.innerHTML = `
     <div class="card">
-    <div class="front-side">Front</div>
+    <div class="front-side"></div>
     <div class="back-side" style = "background-image: url(./images/${cardsType}/${i+1}.jpg)">${i}</div>
     </div>`;
     cards.appendChild(element);
@@ -43,7 +43,7 @@ export default class Game {
       element.classList.add('card-wrapper');
       element.innerHTML = `
       <div class="card">
-      <div class="front-side">Front</div>
+      <div class="front-side"></div>
       <div class="back-side" style = "background-image: url(./images/${cardsType}/${i+1}.jpg)">${i}</div>
       </div>`;
       cards.appendChild(element);
@@ -54,8 +54,8 @@ wrigthSteps:number = 0;
 time:number = 0;
 timerId:any;
 async calculateScore(){
-console.log('time', this.time);
 let score:number = this.wrigthSteps *100-(this.time*10);
+if (score<0){score=0};
 document.querySelector('.game-score')!.innerHTML = String(score);
 await this.finish(score);
 }
@@ -114,11 +114,25 @@ finish(score:number){
   if (flippedCards.length === allCards.length) {
     const congratsPopup = new CongratsPopup();
     congratsPopup.render(score);
+    clearInterval(this.timerId);
+    this.wrigthSteps = 0;
+    this.time = 0;
   }
-  clearInterval(this.timerId);
+
 }
 
 start() {
+  const main = document.querySelector('main');
+  if (document.querySelector('.cards')){
+    const cards:any = document.querySelector('.cards');
+    main?.removeChild(cards);
+
+  }
+  if (document.querySelector('.gameParamaters')){
+    const gameParamaters:any = document.querySelector('.gameParamaters');
+    main?.removeChild(gameParamaters);
+
+  }
   this.setGameSettings();
     const cards = document.querySelector('.cards');
     const cardHandle = (event:any) => {
