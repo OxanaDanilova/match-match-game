@@ -1,4 +1,5 @@
 import './Header.scss';
+
 export default class Header {
   render() {
     const header = document.createElement('header');
@@ -10,9 +11,9 @@ export default class Header {
     ul.classList.add('menu');
     nav.appendChild(ul);
     const menuArr = ['About Game', 'Settings', 'Best Score'];
-    for (let i=0; i<3; i += 1){
-      let li = document.createElement('li');
-      if (i===0){
+    for (let i = 0; i < 3; i += 1) {
+      const li = document.createElement('li');
+      if (i === 0) {
         li.classList.add('menu-active');
       }
       li.innerHTML = menuArr[i];
@@ -32,7 +33,6 @@ export default class Header {
     startGameBtn.innerHTML = 'Start game';
     startGameBtn.classList.add('start-game-btn');
     header.appendChild(startGameBtn);
-
   }
 
   displayStartGame(firstName, secondName, email) {
@@ -51,7 +51,5 @@ export default class Header {
     <p class="email">${email}</p>`;
     p.style.display = 'none';
     userBlock.appendChild(p);
-
   }
-
 }

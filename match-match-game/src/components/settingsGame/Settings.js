@@ -1,7 +1,8 @@
 import Router from '../router/Router';
 import './Settings.scss';
+
 export default class Settings {
-  render(){
+  render() {
     const main = document.querySelector('main');
     const settingsForm = document.createElement('form');
     settingsForm.classList.add('settings-wrapper');
@@ -29,19 +30,20 @@ export default class Settings {
     const setting = menu.children[1];
 
     setting.addEventListener('click', this.showSettingsForm);
-
-
   }
+
   showSettingsForm() {
     const router = new Router();
     router.clearAllForm();
     const settingsForm = document.querySelector('.settings-wrapper');
     settingsForm.style.display = 'flex';
   }
+
   getCardsQuantity() {
     const quantityCards = document.querySelector('#cardsQuantity').value;
     return quantityCards;
   }
+
   getCardsType() {
     const typeCards = document.querySelector('#cardsType').value;
     return typeCards;

@@ -1,4 +1,4 @@
-import Router from "../router/Router";
+import Router from '../router/Router';
 import './AboutGame.scss';
 
 export class AboutGame {
@@ -34,5 +34,4 @@ export class AboutGame {
     const aboutGame = document.querySelector('.about-game-section');
     aboutGame.style.display = 'flex';
   }
-
 }

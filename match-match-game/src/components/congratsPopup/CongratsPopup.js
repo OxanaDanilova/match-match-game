@@ -1,8 +1,9 @@
 import DataBase from '../DataBase/DataBase';
 import Router from '../router/Router';
 import './CongratsPopup.scss';
-export default class CongratsPopup{
-   render(score){
+
+export default class CongratsPopup {
+  render(score) {
     const div = document.createElement('div');
     div.innerHTML = `
     <p>Congratulations!</p>
@@ -11,10 +12,9 @@ export default class CongratsPopup{
     div.classList.add('congr-wrapper');
     div.style.display = 'flex';
     const main = document.querySelector('main');
-     main?.appendChild(div);
-     const btnClose = document.querySelector('.btn-close');
-     btnClose?.addEventListener('click', this.closeCongrPopup);
-
+    main?.appendChild(div);
+    const btnClose = document.querySelector('.btn-close');
+    btnClose?.addEventListener('click', this.closeCongrPopup);
   }
 
   closeCongrPopup() {
@@ -23,8 +23,8 @@ export default class CongratsPopup{
     const userFirstName = document.querySelector('.firstName').innerHTML;
     const userSecondName = document.querySelector('.secondName').innerHTML;
     const userEmail = document.querySelector('.email').innerHTML;
-    console.log('user data:', userFirstName,userSecondName, userEmail, score);
-    db.checkDublicates(userFirstName,userSecondName, userEmail, score);
+    console.log('user data:', userFirstName, userSecondName, userEmail, score);
+    db.checkDublicates(userFirstName, userSecondName, userEmail, score);
     const congrPopup = document.querySelector('.congr-wrapper');
     const main = document.querySelector('main');
     main.removeChild(congrPopup);

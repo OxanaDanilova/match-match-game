@@ -1,31 +1,29 @@
 export default class Router {
-  clearAllForm(){
-    if (document.querySelector('.about-game-section')){
+  clearAllForm() {
+    if (document.querySelector('.about-game-section')) {
       document.querySelector('.about-game-section').style.display = 'none';
     }
-    if (document.querySelector('.register-form')){
+    if (document.querySelector('.register-form')) {
       document.querySelector('.register-form').style.display = 'none';
     }
 
-    if (document.querySelector('.settings-wrapper')){
+    if (document.querySelector('.settings-wrapper')) {
       document.querySelector('.settings-wrapper').style.display = 'none';
     }
 
-    if (document.querySelector('.best-score-section')){
+    if (document.querySelector('.best-score-section')) {
       document.querySelector('.best-score-section').style.display = 'none';
     }
 
-    if (document.querySelector('.cards')){
+    if (document.querySelector('.cards')) {
       document.querySelector('.cards').style.display = 'none';
     }
-    if (document.querySelector('.gameParamaters')){
+    if (document.querySelector('.gameParamaters')) {
       document.querySelector('.gameParamaters').style.display = 'none';
     }
 
-    if (document.querySelector('.congr-wrapper')){
+    if (document.querySelector('.congr-wrapper')) {
       document.querySelector('.congr-wrapper').style.display = 'none';
     }
-
-
   }
 }

@@ -1,6 +1,7 @@
 import BestScore from '../bestScore/BestScore';
+
 export default class DataBase {
-  array=[/* {"first_name":"Dmitrii1", "second_name":"Panfilov1", "email":"df@ff.ff", "score":"200"},
+  array = [/* {"first_name":"Dmitrii1", "second_name":"Panfilov1", "email":"df@ff.ff", "score":"200"},
   {"first_name":"Dmitrii", "second_name":"Panfilov", "email":"df@ff.ff", "score":"200"},
   {"first_name":"Dmitrii", "second_name":"Panfilov", "email":"df@ff.ff", "score":"300"},
   {"first_name":"Dmitrii", "second_name":"Panfilov", "email":"df@ff.ff", "score":"200"},
@@ -10,23 +11,27 @@ export default class DataBase {
   {"first_name":"Dmitrii", "second_name":"Panfilov", "email":"df@ff.ff", "score":"400"},
   {"first_name":"Dmitrii", "second_name":"Panfilov", "email":"df@ff.ff", "score":"250"},
   {"first_name":"Dmitrii", "second_name":"Panfilov", "email":"df@ff.ff", "score":"310"} */];
-  getMinScore(){
-    let item = this.array[this.array.length-1].score;
+
+  getMinScore() {
+    const item = this.array[this.array.length - 1].score;
     console.log(item);
   }
-  checkDublicates(userFirstName, userSecondName, userEmail, userScore){
-    if (this.array.length===0){
-      this.array.push({"first_name":`${userFirstName}`, "second_name":`${userSecondName}`, "email":`${userEmail}`, "score":`${userScore}`});
+
+  checkDublicates(userFirstName, userSecondName, userEmail, userScore) {
+    if (this.array.length === 0) {
+      this.array.push({
+        first_name: `${userFirstName}`, second_name: `${userSecondName}`, email: `${userEmail}`, score: `${userScore}`,
+      });
       console.log('BestScore');
       const bestScore = new BestScore();
       bestScore.render(this.array);
     } else {
       let dublicates = false;
-    this.array.forEach((item)=>{
-      if (item.first_name===userFirstName && item.second_name === userSecondName &&
-        item.email=== userEmail) {
+      this.array.forEach((item) => {
+        if (item.first_name === userFirstName && item.second_name === userSecondName
+        && item.email === userEmail) {
           dublicates = true;
-          if (+item.score<+userScore) {
+          if (+item.score < +userScore) {
             item.score = userScore;
             userScore = 0;
             const bestScore = new BestScore();
@@ -36,16 +41,17 @@ export default class DataBase {
             bestScore.render(this.array);
           }
         }
-    });
-    if (!dublicates) this.addItem(userFirstName, userSecondName, userEmail, userScore);
+      });
+      if (!dublicates) this.addItem(userFirstName, userSecondName, userEmail, userScore);
     }
-
   }
 
-  addItem(userFirstName, userSecondName, userEmail, userScore){
-    this.array.forEach((item, index)=>{
-      if (+item.score<+userScore){
-        this.array.splice(index,0,{"first_name":`${userFirstName}`, "second_name":`${userSecondName}`, "email":`${userEmail}`, "score":`${userScore}`});
+  addItem(userFirstName, userSecondName, userEmail, userScore) {
+    this.array.forEach((item, index) => {
+      if (+item.score < +userScore) {
+        this.array.splice(index, 0, {
+          first_name: `${userFirstName}`, second_name: `${userSecondName}`, email: `${userEmail}`, score: `${userScore}`,
+        });
         userScore = 0;
         this.array.pop();
       }
@@ -54,7 +60,4 @@ export default class DataBase {
     const bestScore = new BestScore();
     bestScore.render(this.array);
   }
-
-
 }
-

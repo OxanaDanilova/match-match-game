@@ -1,21 +1,22 @@
 import Router from '../router/Router';
 import './BestScore.scss';
+
 export default class BestScore {
   render(array) {
     const main = document.querySelector('main');
-    if (document.querySelector('.best-score-section')){
+    if (document.querySelector('.best-score-section')) {
       const sec = document.querySelector('.best-score-section');
       main.removeChild(sec);
-    };
+    }
     const scoreSection = document.createElement('section');
     scoreSection.classList.add('best-score-section');
     scoreSection.innerHTML = `
     <h3>Best players:</h3>
     `;
     const ul = document.createElement('ul');
-    ul.classList.add("score-table");
+    ul.classList.add('score-table');
     scoreSection.appendChild(ul);
-    for (let i=0;i<array.length; i += 1){
+    for (let i = 0; i < array.length; i += 1) {
       const li = document.createElement('li');
       li.innerHTML = `
       <div class="user-data">
@@ -29,7 +30,7 @@ export default class BestScore {
       <p>Score</p>
       <p class="user-score">${array[i].score}</p>
     </div>`;
-    ul.appendChild(li);
+      ul.appendChild(li);
     }
     scoreSection.appendChild(ul);
     main.appendChild(scoreSection);
@@ -39,6 +40,7 @@ export default class BestScore {
 
     bestScore.addEventListener('click', this.showBestScoreSection);
   }
+
   showBestScoreSection() {
     const router = new Router();
     router.clearAllForm();
