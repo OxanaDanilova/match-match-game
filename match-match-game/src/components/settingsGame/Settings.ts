@@ -2,8 +2,10 @@ import Router from '../router/Router';
 import './Settings.scss';
 
 export default class Settings {
-  render() {
+  static render():void {
     const main = document.querySelector('main');
+    if (!main) { throw new Error('Main element is not found!'); }
+
     const settingsForm = document.createElement('form');
     settingsForm.classList.add('settings-wrapper');
     settingsForm.innerHTML = `
@@ -27,25 +29,31 @@ export default class Settings {
     main.appendChild(settingsForm);
 
     const menu = document.querySelector('.menu');
+    if (!menu) { throw new Error('Menu element is not found!'); }
+
     const setting = menu.children[1];
 
-    setting.addEventListener('click', this.showSettingsForm);
+    setting.addEventListener('click', Settings.showSettingsForm);
   }
 
-  showSettingsForm() {
+  static showSettingsForm():void {
     const router = new Router();
     router.clearAllForm();
-    const settingsForm = document.querySelector('.settings-wrapper');
+    const settingsForm = <HTMLFormElement>document.querySelector('.settings-wrapper');
+    if (!settingsForm) { throw new Error('Settings form is not found!'); }
     settingsForm.style.display = 'flex';
   }
 
-  getCardsQuantity() {
-    const quantityCards = document.querySelector('#cardsQuantity').value;
-    return quantityCards;
+  static getCardsQuantity():number {
+    const quantityCardsElement = <HTMLSelectElement>document.querySelector('#cardsQuantity');
+    if (!quantityCardsElement) { throw new Error('Element is not found!'); }
+    const quantityCards = quantityCardsElement.value;
+    return +quantityCards;
   }
 
-  getCardsType() {
-    const typeCards = document.querySelector('#cardsType').value;
+  static getCardsType():string {
+    const typeCardsElement = <HTMLSelectElement>document.querySelector('#cardsType');
+    const typeCards = typeCardsElement.value;
     return typeCards;
   }
 }

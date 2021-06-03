@@ -7,15 +7,15 @@ import BestScore from './components/bestScore/BestScore';
 import { AboutGame } from './components/aboutGame/AboutGame';
 
 class App {
-  render() {
+  static render() {
     const header = new Header();
     header.render();
     const registration = new Registration();
     registration.render();
     const aboutGame = new AboutGame();
     aboutGame.render();
-    const settings = new Settings();
-    settings.render();
+    //const settings = new Settings();
+    Settings.render();
     const game = new Game();
     game.handleStartBtn();
     const bestScore = new BestScore();
@@ -23,5 +23,5 @@ class App {
   }
 }
 
-const app = new App();
-app.render();
+//const app = new App();
+App.render();
