@@ -3,7 +3,7 @@ import Header from '../header/Header';
 import Router from '../router/Router';
 
 export default class Registration {
-  render() {
+  render():void {
     const main = document.createElement('main');
     main.innerHTML = `
     <form action="" class="register-form">
@@ -42,15 +42,15 @@ export default class Registration {
     document.body.appendChild(main);
     const regBtn = document.querySelector('.register-btn');
     if (!regBtn) throw new Error('Element is not found!');
-    regBtn.addEventListener('click', this.displayForm);
+    regBtn.addEventListener('click', Registration.displayForm);
     const userFirstName = <HTMLInputElement>document.querySelector('#first-name');
     const userSecondName = <HTMLInputElement>document.querySelector('#second-name');
     const userEmail = <HTMLInputElement>document.querySelector('#email');
     if (!userFirstName || !userSecondName || !userEmail) throw new Error('Element is not found!');
 
-    userFirstName.addEventListener('keyup', (event) => this.checkFormInputs(event.target as HTMLInputElement));
-    userSecondName.addEventListener('keyup', (event) => this.checkFormInputs(event.target as HTMLInputElement));
-    userEmail.addEventListener('keyup', (event) => this.checkEmail(event.target as HTMLInputElement));
+    userFirstName.addEventListener('keyup', (event) => Registration.checkFormInputs(event.target as HTMLInputElement));
+    userSecondName.addEventListener('keyup', (event) => Registration.checkFormInputs(event.target as HTMLInputElement));
+    userEmail.addEventListener('keyup', (event) => Registration.checkEmail(event.target as HTMLInputElement));
 
     const form = document.querySelector('.register-form');
     if (!form) throw new Error('Registration form is not found!');
@@ -58,10 +58,10 @@ export default class Registration {
 
     const cancelBtn = document.querySelector('.cancel-btn');
     if (!cancelBtn) throw new Error('Cancel button is not found!');
-    cancelBtn.addEventListener('click', this.clearForm);
+    cancelBtn.addEventListener('click', Registration.clearForm);
   }
 
-  clearForm() {
+  static clearForm():void {
     const allFields = document.querySelectorAll('.form-field-wrapper');
     allFields.forEach((el) => {
       if (el.classList.contains('success')) {
@@ -73,7 +73,7 @@ export default class Registration {
     });
   }
 
-  displayForm() {
+  static displayForm():void {
     const router = new Router();
     router.clearAllForm();
     const form = <HTMLFormElement>document.querySelector('.register-form');
@@ -81,7 +81,7 @@ export default class Registration {
     form.style.display = 'flex';
   }
 
-  isFormComplete() {
+  static isFormComplete():void {
     const fullFields = document.querySelectorAll('.success');
     const submitBtn = <HTMLButtonElement>document.querySelector('.submit-btn');
     if (!submitBtn) throw new Error('Submit button is not found!');
@@ -92,42 +92,41 @@ export default class Registration {
     }
   }
 
-  checkFormInputs(element:HTMLInputElement) {
+  static checkFormInputs(element:HTMLInputElement):void {
     const regNumber = /[0-9]/g;
     const regChar = /[~!@#$%*()_—+=|:;"'`<>,.?/^]/g;
     let message = '';
     if (element.value.trim() === '') {
       message = 'This field can not be empty!';
-      this.setErrorStatus(element, message);
+      Registration.setErrorStatus(element, message);
     } else if ((regNumber.test(element.value.trim()) === true)
     || (regChar.test(element.value.trim()) === true)) {
       message = 'This field can\'t contain numbers oder ~!@#$%*()_—+=|:;"\'<>,.?/^&#x60;';
-      this.setErrorStatus(element, message);
+      Registration.setErrorStatus(element, message);
     } else {
-      this.setSuccessStatus(element);
+      Registration.setSuccessStatus(element);
     }
-    this.isFormComplete();
+    Registration.isFormComplete();
   }
 
-  checkEmail(element:HTMLInputElement) {
-    const regEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  static checkEmail(element:HTMLInputElement):void {
+    const regEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     let message = '';
     if (element.value.trim() === '') {
       message = 'This field can not be empty!';
-      this.setErrorStatus(element, message);
+      Registration.setErrorStatus(element, message);
     } else if (regEmail.test(element.value.trim()) === false) {
       message = 'Email is not valid!';
-      this.setErrorStatus(element, message);
+      Registration.setErrorStatus(element, message);
     } else {
-      this.setSuccessStatus(element);
+      Registration.setSuccessStatus(element);
     }
-    this.isFormComplete();
+    Registration.isFormComplete();
   }
 
-  setErrorStatus(element:HTMLElement, message:string) {
-
+  static setErrorStatus(element:HTMLElement, message:string):void {
     const parent = element.parentElement;
-    if (!parent) {throw new Error('Parent element is not found!')};
+    if (!parent) { throw new Error('Parent element is not found!'); }
     if (parent.classList.contains('success')) {
       parent.classList.remove('success');
     }
@@ -135,16 +134,16 @@ export default class Registration {
     parent.children[4].innerHTML = message;
   }
 
-  setSuccessStatus(element:HTMLInputElement) {
+  static setSuccessStatus(element:HTMLInputElement):void {
     const parent = element.parentElement;
-    if (!parent){ throw new Error('Parent element is not found!')};
+    if (!parent) { throw new Error('Parent element is not found!'); }
     if (parent.classList.contains('error')) {
       parent.classList.remove('error');
     }
     parent.classList.add('success');
   }
 
-  createUser = (event:Event) => {
+  createUser = (event:Event):void => {
     event.preventDefault();
     const userFirstNameElem = <HTMLInputElement>document.querySelector('#first-name');
     const userSecondNameElem = <HTMLInputElement>document.querySelector('#second-name');
@@ -160,6 +159,6 @@ export default class Registration {
     const form = <HTMLFormElement>document.querySelector('.register-form');
     if (!form) throw new Error('Registration form is not found!');
     form.style.display = 'none';
-    this.clearForm();
+    Registration.clearForm();
   };
 }
