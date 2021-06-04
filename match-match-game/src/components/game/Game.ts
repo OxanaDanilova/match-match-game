@@ -149,7 +149,6 @@ export default class Game {
 
   setGameSettings() {
     Router.clearAllForm();
-    const settings = new Settings();
     const cardsQuantity = Settings.getCardsQuantity();
     const cardsType = Settings.getCardsType();
     this.createCards(cardsQuantity, cardsType);

@@ -20,14 +20,13 @@ export default class CongratsPopup {
   static closeCongrPopup():void {
     const scoreEl = <HTMLElement>document.querySelector('.score');
     const score = scoreEl.innerHTML.trim();
-    const db = new DataBase();
     const userFirstNameEl = <HTMLElement>document.querySelector('.firstName');
     const userFirstName = userFirstNameEl.innerHTML;
     const userSecondNameEl = <HTMLElement>document.querySelector('.secondName');
     const userSecondName = userSecondNameEl.innerHTML;
     const userEmailEl = <HTMLElement>document.querySelector('.email');
     const userEmail = userEmailEl.innerHTML;
-    db.checkDublicates(userFirstName, userSecondName, userEmail, score);
+    DataBase.checkDublicates(userFirstName, userSecondName, userEmail, score);
     const congrPopup = <HTMLElement>document.querySelector('.congr-wrapper');
     const main = <HTMLElement>document.querySelector('main');
     main.removeChild(congrPopup);
