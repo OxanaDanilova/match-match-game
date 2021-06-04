@@ -116,8 +116,7 @@ export default class Game {
     const flippedCards = document.querySelectorAll('.flipped');
     const allCards = document.querySelectorAll('.card');
     if (flippedCards.length === allCards.length) {
-      const congratsPopup = new CongratsPopup();
-      congratsPopup.render(score);
+      CongratsPopup.render(score);
       clearInterval(this.timerId);
       this.wrigthSteps = 0;
       this.time = 0;
