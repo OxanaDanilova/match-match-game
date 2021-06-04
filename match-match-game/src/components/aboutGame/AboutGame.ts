@@ -2,8 +2,8 @@ import Router from '../router/Router';
 import './AboutGame.scss';
 
 export class AboutGame {
-  render() {
-    const main = document.querySelector('main');
+  static render():void {
+    const main = <HTMLElement>document.querySelector('main');
     const section = document.createElement('section');
     section.classList.add('about-game-section');
     section.innerHTML = `<h3>How to play?</h3>
@@ -22,15 +22,15 @@ export class AboutGame {
     `;
     main.appendChild(section);
 
-    const menu = document.querySelector('.menu');
-    const aboutGame = menu.children[0];
+    const menu = <HTMLElement>document.querySelector('.menu');
+    const aboutGameMenuItem = menu.children[0];
 
-    aboutGame.addEventListener('click', this.showAboutGameSection);
+    aboutGameMenuItem.addEventListener('click', AboutGame.showAboutGameSection);
   }
 
-  showAboutGameSection() {
+  static showAboutGameSection():void {
     Router.clearAllForm();
-    const aboutGame = document.querySelector('.about-game-section');
+    const aboutGame = <HTMLElement>document.querySelector('.about-game-section');
     aboutGame.style.display = 'flex';
   }
 }

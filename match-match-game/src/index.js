@@ -12,8 +12,7 @@ class App {
     Header.render();
     const registration = new Registration();
     registration.render();
-    const aboutGame = new AboutGame();
-    aboutGame.render();
+    AboutGame.render();
     // const settings = new Settings();
     Settings.render();
     const game = new Game();
