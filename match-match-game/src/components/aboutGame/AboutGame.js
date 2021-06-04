@@ -29,8 +29,7 @@ export class AboutGame {
   }
 
   showAboutGameSection() {
-    const router = new Router();
-    router.clearAllForm();
+    Router.clearAllForm();
     const aboutGame = document.querySelector('.about-game-section');
     aboutGame.style.display = 'flex';
   }

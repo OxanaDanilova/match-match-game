@@ -37,8 +37,7 @@ export default class Settings {
   }
 
   static showSettingsForm():void {
-    const router = new Router();
-    router.clearAllForm();
+    Router.clearAllForm();
     const settingsForm = <HTMLFormElement>document.querySelector('.settings-wrapper');
     if (!settingsForm) { throw new Error('Settings form is not found!'); }
     settingsForm.style.display = 'flex';

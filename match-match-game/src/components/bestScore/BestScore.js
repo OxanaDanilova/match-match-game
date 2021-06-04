@@ -42,8 +42,7 @@ export default class BestScore {
   }
 
   showBestScoreSection() {
-    const router = new Router();
-    router.clearAllForm();
+    Router.clearAllForm();
     const scoreSection = document.querySelector('.best-score-section');
     scoreSection.style.display = 'flex';
   }

@@ -8,7 +8,7 @@ import { AboutGame } from './components/aboutGame/AboutGame';
 
 class App {
   static render() {
-    //const header = new Header();
+    // const header = new Header();
     Header.render();
     const registration = new Registration();
     registration.render();

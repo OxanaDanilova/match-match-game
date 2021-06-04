@@ -40,13 +40,11 @@ export default class Registration {
       </div>
     </form>`;
     document.body.appendChild(main);
-    const regBtn = document.querySelector('.register-btn');
-    if (!regBtn) throw new Error('Element is not found!');
+    const regBtn = <HTMLButtonElement>document.querySelector('.register-btn');
     regBtn.addEventListener('click', Registration.displayForm);
     const userFirstName = <HTMLInputElement>document.querySelector('#first-name');
     const userSecondName = <HTMLInputElement>document.querySelector('#second-name');
     const userEmail = <HTMLInputElement>document.querySelector('#email');
-    if (!userFirstName || !userSecondName || !userEmail) throw new Error('Element is not found!');
 
     userFirstName.addEventListener('keyup', (event) => Registration.checkFormInputs(event.target as HTMLInputElement));
     userSecondName.addEventListener('keyup', (event) => Registration.checkFormInputs(event.target as HTMLInputElement));
@@ -74,8 +72,7 @@ export default class Registration {
   }
 
   static displayForm():void {
-    const router = new Router();
-    router.clearAllForm();
+    Router.clearAllForm();
     const form = <HTMLFormElement>document.querySelector('.register-form');
     if (!form) throw new Error('Registration form is not found!');
     form.style.display = 'flex';
@@ -148,13 +145,11 @@ export default class Registration {
     const userFirstNameElem = <HTMLInputElement>document.querySelector('#first-name');
     const userSecondNameElem = <HTMLInputElement>document.querySelector('#second-name');
     const userEmailElem = <HTMLInputElement>document.querySelector('#email');
-    if (!userFirstNameElem || !userSecondNameElem || !userEmailElem) throw new Error('Element is not found!');
 
     const userFirstName = userFirstNameElem.value.trim();
     const userSecondName = userSecondNameElem.value.trim();
     const userEmail = userEmailElem.value.trim();
 
-    //const header = new Header();
     Header.displayStartGame(userFirstName, userSecondName, userEmail);
     const form = <HTMLFormElement>document.querySelector('.register-form');
     if (!form) throw new Error('Registration form is not found!');
