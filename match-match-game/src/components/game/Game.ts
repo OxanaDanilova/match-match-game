@@ -4,13 +4,13 @@ import Settings from '../settingsGame/Settings';
 import './Game.scss';
 
 export default class Game {
-  handleStartBtn() {
-    const startBtn = document.querySelector('.start-game-btn');
+  handleStartBtn():void {
+    const startBtn = <HTMLButtonElement>document.querySelector('.start-game-btn');
     const game = new Game();
-    startBtn?.addEventListener('click', this.start.bind(game));
+    startBtn.addEventListener('click', this.start.bind(game));
   }
 
-  createCards(cardsQuantity:number, cardsType:string) {
+  static createCards(cardsQuantity:number, cardsType:string):void {
     const gameParameters = document.createElement('div');
     gameParameters.innerHTML = `
     <div class="timer-wrapper">
@@ -23,7 +23,7 @@ export default class Game {
     </div>`;
     gameParameters.classList.add('gameParamaters');
     const cards:HTMLElement = document.createElement('ul');
-    const main:HTMLElement = document.querySelector('main')!;
+    const main = <HTMLElement>document.querySelector('main');
     main.appendChild(gameParameters);
     document.body.appendChild(main);
     cards.classList.add('cards');
@@ -54,17 +54,18 @@ export default class Game {
 
   time = 0;
 
-  timerId:any;
+  timerId = 0;
 
-  async calculateScore() {
+  async calculateScore():Promise<void> {
     let score:number = this.wrigthSteps * 100 - (this.time * 10);
     if (score < 0) { score = 0; }
-    document.querySelector('.game-score')!.innerHTML = String(score);
+    const gameScoreEl = <HTMLElement>document.querySelector('.game-score');
+    gameScoreEl.innerHTML = String(score);
     await this.finish(score);
   }
 
-  startTimer() {
-    const gameTime = document.querySelector('.game-time');
+  startTimer():void {
+    const gameTime = <HTMLElement>document.querySelector('.game-time');
     let sec = 0;
     let min = 0;
     const calculateTime = () => {
@@ -82,14 +83,14 @@ export default class Game {
       if (String(sec).length === 1) {
         secDisplay = `0${sec}`;
       }
-      gameTime!.innerHTML = `${minDisplay}:${secDisplay}`;
+      gameTime.innerHTML = `${minDisplay}:${secDisplay}`;
       min = +min;
       sec = +sec;
     };
-    this.timerId = setInterval(calculateTime, 1000);
+    this.timerId = window.setInterval(calculateTime, 1000);
   }
 
-  checkActiveCards() {
+  checkActiveCards():void {
     const activeCards = document.querySelectorAll('.active-card');
     if (activeCards.length === 2) {
       if (activeCards[0].innerHTML === activeCards[1].innerHTML) {
@@ -105,14 +106,16 @@ export default class Game {
           element.classList.add('wrong-cards');
           setTimeout(() => {
             element.classList.remove('wrong-cards');
-            element.parentElement!.parentElement!.classList.remove('flipped');
+            const parentEl = <HTMLElement>element.parentElement;
+            const secParentEl = <HTMLElement>parentEl.parentElement;
+            secParentEl.classList.remove('flipped');
           }, 2000);
         });
       }
     }
   }
 
-  finish(score:number) {
+  finish(score:number):void {
     const flippedCards = document.querySelectorAll('.flipped');
     const allCards = document.querySelectorAll('.card');
     if (flippedCards.length === allCards.length) {
@@ -123,34 +126,37 @@ export default class Game {
     }
   }
 
-  start() {
-    const main = document.querySelector('main');
+  start():void {
+    const main = <HTMLElement>document.querySelector('main');
     if (document.querySelector('.cards')) {
-      const cards:any = document.querySelector('.cards');
-      main?.removeChild(cards);
+      const cards = <HTMLElement>document.querySelector('.cards');
+      main.removeChild(cards);
     }
     if (document.querySelector('.gameParamaters')) {
-      const gameParamaters:any = document.querySelector('.gameParamaters');
-      main?.removeChild(gameParamaters);
+      const gameParamaters = <HTMLElement>document.querySelector('.gameParamaters');
+      main.removeChild(gameParamaters);
     }
-    this.setGameSettings();
-    const cards = document.querySelector('.cards');
-    const cardHandle = (event:any) => {
-      const { target } = event;
+    Game.setGameSettings();
+    const cards = <HTMLElement>document.querySelector('.cards');
+    const cardHandle = (event:Event) => {
+      const target = <HTMLElement>event.target;
       if (target.classList.contains('front-side')) {
-        target.parentElement.parentElement.classList.add('flipped');
-        target.nextElementSibling.classList.add('active-card');
+        const parentEl = <HTMLElement>target.parentElement;
+        const secParentEl = <HTMLElement>parentEl.parentElement;
+        secParentEl.classList.add('flipped');
+        const nextSibling = <HTMLElement>target.nextElementSibling;
+        nextSibling.classList.add('active-card');
         this.checkActiveCards();
       }
     };
-    cards!.addEventListener('click', cardHandle);
+    cards.addEventListener('click', cardHandle);
     this.startTimer();
   }
 
-  setGameSettings() {
+  static setGameSettings():void {
     Router.clearAllForm();
     const cardsQuantity = Settings.getCardsQuantity();
     const cardsType = Settings.getCardsType();
-    this.createCards(cardsQuantity, cardsType);
+    Game.createCards(cardsQuantity, cardsType);
   }
 }
