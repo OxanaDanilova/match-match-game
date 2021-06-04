@@ -17,8 +17,7 @@ class App {
     Settings.render();
     const game = new Game();
     game.handleStartBtn();
-    const bestScore = new BestScore();
-    bestScore.render([]);
+    BestScore.render([]);
   }
 }
 

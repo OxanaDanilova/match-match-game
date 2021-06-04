@@ -22,9 +22,7 @@ export default class DataBase {
       this.array.push({
         first_name: `${userFirstName}`, second_name: `${userSecondName}`, email: `${userEmail}`, score: `${userScore}`,
       });
-      console.log('BestScore');
-      const bestScore = new BestScore();
-      bestScore.render(this.array);
+      BestScore.render(this.array);
     } else {
       let dublicates = false;
       this.array.forEach((item) => {
@@ -34,11 +32,9 @@ export default class DataBase {
           if (+item.score < +userScore) {
             item.score = userScore;
             userScore = 0;
-            const bestScore = new BestScore();
-            bestScore.render(this.array);
+            BestScore.render(this.array);
           } else {
-            const bestScore = new BestScore();
-            bestScore.render(this.array);
+            BestScore.render(this.array);
           }
         }
       });
@@ -57,7 +53,6 @@ export default class DataBase {
       }
     });
     console.log(this.array);
-    const bestScore = new BestScore();
-    bestScore.render(this.array);
+    BestScore.render(this.array);
   }
 }

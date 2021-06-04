@@ -1,11 +1,18 @@
 import Router from '../router/Router';
 import './BestScore.scss';
 
+interface DBarrayItem {
+  first_name: string,
+  second_name: string,
+  email: string,
+  score: string
+}
+
 export default class BestScore {
-  render(array) {
-    const main = document.querySelector('main');
+  static render(array:DBarrayItem[]):void {
+    const main = <HTMLElement>document.querySelector('main');
     if (document.querySelector('.best-score-section')) {
-      const sec = document.querySelector('.best-score-section');
+      const sec = <HTMLElement>document.querySelector('.best-score-section');
       main.removeChild(sec);
     }
     const scoreSection = document.createElement('section');
@@ -35,15 +42,15 @@ export default class BestScore {
     scoreSection.appendChild(ul);
     main.appendChild(scoreSection);
 
-    const menu = document.querySelector('.menu');
+    const menu = <HTMLElement>document.querySelector('.menu');
     const bestScore = menu.children[2];
 
-    bestScore.addEventListener('click', this.showBestScoreSection);
+    bestScore.addEventListener('click', BestScore.showBestScoreSection);
   }
 
-  showBestScoreSection() {
+  static showBestScoreSection():void {
     Router.clearAllForm();
-    const scoreSection = document.querySelector('.best-score-section');
+    const scoreSection = <HTMLElement>document.querySelector('.best-score-section');
     scoreSection.style.display = 'flex';
   }
 }
