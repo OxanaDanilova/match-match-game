@@ -154,8 +154,8 @@ export default class Registration {
     const userSecondName = userSecondNameElem.value.trim();
     const userEmail = userEmailElem.value.trim();
 
-    const header = new Header();
-    header.displayStartGame(userFirstName, userSecondName, userEmail);
+    //const header = new Header();
+    Header.displayStartGame(userFirstName, userSecondName, userEmail);
     const form = <HTMLFormElement>document.querySelector('.register-form');
     if (!form) throw new Error('Registration form is not found!');
     form.style.display = 'none';

@@ -1,7 +1,7 @@
 import './Header.scss';
 
 export default class Header {
-  render() {
+  static render():void {
     const header = document.createElement('header');
     document.body.appendChild(header);
     const nav = document.createElement('nav');
@@ -35,12 +35,12 @@ export default class Header {
     header.appendChild(startGameBtn);
   }
 
-  displayStartGame(firstName, secondName, email) {
-    const startGameBtn = document.querySelector('.start-game-btn');
+  static displayStartGame(firstName:string, secondName:string, email:string):void {
+    const startGameBtn = <HTMLButtonElement>document.querySelector('.start-game-btn');
     startGameBtn.style.display = 'block';
-    const regBtn = document.querySelector('.register-btn');
+    const regBtn = <HTMLButtonElement>document.querySelector('.register-btn');
     regBtn.style.display = 'none';
-    const userBlock = document.querySelector('.user-block');
+    const userBlock = <HTMLDivElement>document.querySelector('.user-block');
     userBlock.innerHTML = `
     <p>User:</p>
     <p class="firstName">${firstName}</p>

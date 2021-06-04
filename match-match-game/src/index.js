@@ -8,13 +8,13 @@ import { AboutGame } from './components/aboutGame/AboutGame';
 
 class App {
   static render() {
-    const header = new Header();
-    header.render();
+    //const header = new Header();
+    Header.render();
     const registration = new Registration();
     registration.render();
     const aboutGame = new AboutGame();
     aboutGame.render();
-    //const settings = new Settings();
+    // const settings = new Settings();
     Settings.render();
     const game = new Game();
     game.handleStartBtn();
@@ -23,5 +23,5 @@ class App {
   }
 }
 
-//const app = new App();
+// const app = new App();
 App.render();
