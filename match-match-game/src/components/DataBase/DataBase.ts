@@ -65,7 +65,6 @@ export default class DataBase {
         DataBase.array.pop();
       }
     });
-    console.log(DataBase.array);
     BestScore.render(DataBase.array);
   }
 }
