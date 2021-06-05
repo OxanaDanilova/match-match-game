@@ -53,6 +53,7 @@ export default class DataBase {
 
   static addItem(userFirstName:string, userSecondName:string, userEmail:string, userScore:string):void {
     let userScorePar = userScore;
+    let isAdded = false;
     DataBase.array.forEach((item, index) => {
       if (+item.score < +userScorePar) {
         DataBase.array.splice(index, 0, {
@@ -62,9 +63,18 @@ export default class DataBase {
           score: `${userScorePar}`,
         });
         userScorePar = '0';
-        DataBase.array.pop();
+        isAdded = true;
+        if (DataBase.array.length>10) {DataBase.array.pop();}
       }
     });
+    if (isAdded===false && DataBase.array.length<10){
+      DataBase.array.push({
+        first_name: `${userFirstName}`,
+        second_name: `${userSecondName}`,
+        email: `${userEmail}`,
+        score: `${userScorePar}`,
+      });
+    }
     BestScore.render(DataBase.array);
   }
 }
