@@ -50,12 +50,10 @@ export default class Registration {
     userSecondName.addEventListener('keyup', (event) => Registration.checkFormInputs(event.target as HTMLInputElement));
     userEmail.addEventListener('keyup', (event) => Registration.checkEmail(event.target as HTMLInputElement));
 
-    const form = document.querySelector('.register-form');
-    if (!form) throw new Error('Registration form is not found!');
+    const form = <HTMLFormElement>document.querySelector('.register-form');
     form.addEventListener('submit', this.createUser);
 
-    const cancelBtn = document.querySelector('.cancel-btn');
-    if (!cancelBtn) throw new Error('Cancel button is not found!');
+    const cancelBtn = <HTMLButtonElement>document.querySelector('.cancel-btn');
     cancelBtn.addEventListener('click', Registration.clearForm);
   }
 
@@ -73,8 +71,11 @@ export default class Registration {
 
   static displayForm():void {
     Router.clearAllForm();
+    Registration.clearForm();
+    const submitBtn = <HTMLButtonElement>document.querySelector('.submit-btn');
+    submitBtn.disabled = true;
+
     const form = <HTMLFormElement>document.querySelector('.register-form');
-    if (!form) throw new Error('Registration form is not found!');
     form.style.display = 'flex';
   }
 
@@ -142,6 +143,7 @@ export default class Registration {
 
   createUser = (event:Event):void => {
     event.preventDefault();
+
     const userFirstNameElem = <HTMLInputElement>document.querySelector('#first-name');
     const userSecondNameElem = <HTMLInputElement>document.querySelector('#second-name');
     const userEmailElem = <HTMLInputElement>document.querySelector('#email');
@@ -152,8 +154,7 @@ export default class Registration {
 
     Header.displayStartGame(userFirstName, userSecondName, userEmail);
     const form = <HTMLFormElement>document.querySelector('.register-form');
-    if (!form) throw new Error('Registration form is not found!');
+    form.reset();
     form.style.display = 'none';
-    Registration.clearForm();
   };
 }

@@ -24,22 +24,27 @@ export default class Header {
     userBlock.classList.add('user-block');
     header.appendChild(userBlock);
 
+    const buttonsWrapper = document.createElement('div');
+    buttonsWrapper.classList.add('buttons-wrapper');
+
     const regBtn = document.createElement('button');
     regBtn.innerHTML = 'Register new player';
     regBtn.classList.add('register-btn');
-    header.appendChild(regBtn);
+    buttonsWrapper.appendChild(regBtn);
 
     const startGameBtn = document.createElement('button');
     startGameBtn.innerHTML = 'Start game';
     startGameBtn.classList.add('start-game-btn');
-    header.appendChild(startGameBtn);
+    buttonsWrapper.appendChild(startGameBtn);
+
+    header.appendChild(buttonsWrapper);
   }
 
   static displayStartGame(firstName:string, secondName:string, email:string):void {
     const startGameBtn = <HTMLButtonElement>document.querySelector('.start-game-btn');
     startGameBtn.style.display = 'block';
-    const regBtn = <HTMLButtonElement>document.querySelector('.register-btn');
-    regBtn.style.display = 'none';
+    /* const regBtn = <HTMLButtonElement>document.querySelector('.register-btn');
+    regBtn.style.display = 'none'; */
     const userBlock = <HTMLDivElement>document.querySelector('.user-block');
     userBlock.innerHTML = `
     <p>User:</p>

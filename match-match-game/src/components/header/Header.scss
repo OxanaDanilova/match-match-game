@@ -29,9 +29,14 @@ color: rgb(162, 148, 240);
 
 }
 
+.buttons-wrapper {
+  margin-right: 100px;
+  display: flex;
+}
+
 .register-btn,
 .start-game-btn {
-  margin-right: 100px;
+  margin-right: 50px;
   height: 40px;
   font-size: 1.1rem;
   color: mediumslateblue;
