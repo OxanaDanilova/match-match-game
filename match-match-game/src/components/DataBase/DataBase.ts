@@ -64,10 +64,10 @@ export default class DataBase {
         });
         userScorePar = '0';
         isAdded = true;
-        if (DataBase.array.length>10) {DataBase.array.pop();}
+        if (DataBase.array.length > 10) { DataBase.array.pop(); }
       }
     });
-    if (isAdded===false && DataBase.array.length<10){
+    if (isAdded === false && DataBase.array.length < 10) {
       DataBase.array.push({
         first_name: `${userFirstName}`,
         second_name: `${userSecondName}`,

@@ -28,26 +28,25 @@ export default class Game {
     document.body.appendChild(main);
     cards.classList.add('cards');
     main.appendChild(cards);
+
+    const urlArray = [];
+
     for (let i = 0; i < cardsQuantity; i++) {
-      const element:HTMLElement = document.createElement('li');
-      element.classList.add('card-wrapper');
-      element.innerHTML = `
+      urlArray.push(i);
+    }
+    urlArray.concat(urlArray)
+      .sort(() => Math.random() - 0.5)
+      .map((url) => {
+        const element:HTMLElement = document.createElement('li');
+        element.classList.add('card-wrapper');
+        element.innerHTML = `
     <div class="card">
     <div class="front-side"></div>
-    <div class="back-side" style = "background-image: url(./images/${cardsType}/${i + 1}.jpg)">${i}</div>
+    <div class="back-side" style = "background-image: url(./images/${cardsType}/${url + 1}.jpg)">${url}</div>
     </div>`;
-      cards.appendChild(element);
-    }
-    for (let i = 0; i < cardsQuantity; i++) {
-      const element:HTMLElement = document.createElement('li');
-      element.classList.add('card-wrapper');
-      element.innerHTML = `
-      <div class="card">
-      <div class="front-side"></div>
-      <div class="back-side" style = "background-image: url(./images/${cardsType}/${i + 1}.jpg)">${i}</div>
-      </div>`;
-      cards.appendChild(element);
-    }
+        cards.appendChild(element);
+        return url;
+      });
   }
 
   wrigthSteps = 0;
