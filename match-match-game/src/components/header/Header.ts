@@ -43,8 +43,6 @@ export default class Header {
   static displayStartGame(firstName:string, secondName:string, email:string):void {
     const startGameBtn = <HTMLButtonElement>document.querySelector('.start-game-btn');
     startGameBtn.style.display = 'block';
-    /* const regBtn = <HTMLButtonElement>document.querySelector('.register-btn');
-    regBtn.style.display = 'none'; */
     const userBlock = <HTMLDivElement>document.querySelector('.user-block');
     userBlock.innerHTML = `
     <p>User:</p>
