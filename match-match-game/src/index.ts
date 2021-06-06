@@ -3,8 +3,8 @@ import Header from './components/header/Header';
 import Registration from './components/registration/Registration';
 import Game from './components/game/Game';
 import Settings from './components/settingsGame/Settings';
-import BestScore from './components/bestScore/BestScore';
 import { AboutGame } from './components/aboutGame/AboutGame';
+import DataBase from './components/DataBase/DataBase';
 
 class App {
   static render() {
@@ -15,7 +15,7 @@ class App {
     Settings.render();
     const game = new Game();
     game.handleStartBtn();
-    BestScore.render([]);
+    DataBase.init();
   }
 }
 

@@ -8,22 +8,7 @@ interface DBarrayItem {
 }
 
 export default class DataBase {
-  static array:DBarrayItem[] = [/*
-    {"first_name":"Dmitrii1", "second_name":"Panfilov1", "email":"df@ff.ff", "score":"200"},
-  {"first_name":"Dmitrii", "second_name":"Panfilov", "email":"df@ff.ff", "score":"200"},
-  {"first_name":"Dmitrii", "second_name":"Panfilov", "email":"df@ff.ff", "score":"300"},
-  {"first_name":"Dmitrii", "second_name":"Panfilov", "email":"df@ff.ff", "score":"200"},
-  {"first_name":"Dmitrii", "second_name":"Panfilov", "email":"df@ff.ff", "score":"220"},
-  {"first_name":"Dmitrii", "second_name":"Panfilov", "email":"df@ff.ff", "score":"260"},
-  {"first_name":"Dmitrii", "second_name":"Panfilov", "email":"df@ff.ff", "score":"200"},
-  {"first_name":"Dmitrii", "second_name":"Panfilov", "email":"df@ff.ff", "score":"400"},
-  {"first_name":"Dmitrii", "second_name":"Panfilov", "email":"df@ff.ff", "score":"250"},
-  {"first_name":"Dmitrii", "second_name":"Panfilov", "email":"df@ff.ff", "score":"310"} */];
-
-  /*  getMinScore():void {
-    const item = this.array[this.array.length - 1].score;
-    console.log(item);
-  } */
+  static array:DBarrayItem[] = [];
 
   static checkDublicates(userFirstName:string, userSecondName:string, userEmail:string, userScore:string):void {
     if (DataBase.array.length === 0) {
@@ -42,8 +27,10 @@ export default class DataBase {
             item.score = userScorePar;
             userScorePar = '0';
             BestScore.render(DataBase.array);
+            DataBase.updateDB();
           } else {
             BestScore.render(DataBase.array);
+            DataBase.updateDB();
           }
         }
       });
@@ -75,6 +62,46 @@ export default class DataBase {
         score: `${userScorePar}`,
       });
     }
+
     BestScore.render(DataBase.array);
+    DataBase.updateDB();
+  }
+
+  static init():void {
+    const openRequest = indexedDB.open('OxanaDanilova', 1);
+
+    openRequest.onupgradeneeded = function upgradeDB() {
+      const db = openRequest.result;
+      if (!db.objectStoreNames.contains('bestScore')) {
+        db.createObjectStore('bestScore', { autoIncrement: true });
+      }
+    };
+
+    openRequest.onsuccess = function openTransaction() {
+      const db = openRequest.result;
+      const transaction = db.transaction('bestScore', 'readwrite');
+      const bestScore = transaction.objectStore('bestScore');
+      const request = bestScore.getAll();
+      request.onsuccess = function fillArray() {
+        DataBase.array.length = 0;
+        DataBase.array = request.result;
+        BestScore.render(DataBase.array);
+      };
+    };
+  }
+
+  static updateDB():void {
+    const openRequest = indexedDB.open('OxanaDanilova', 1);
+
+    openRequest.onsuccess = function updateArray() {
+      const db = openRequest.result;
+      const transaction = db.transaction('bestScore', 'readwrite');
+      const bestScore = transaction.objectStore('bestScore');
+      bestScore.clear();
+
+      DataBase.array.forEach((el) => {
+        bestScore.add(el);
+      });
+    };
   }
 }
